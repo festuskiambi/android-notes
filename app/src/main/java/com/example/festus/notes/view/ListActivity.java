@@ -1,7 +1,9 @@
-package com.example.festus.notes;
+package com.example.festus.notes.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.festus.notes.R;
 
 public class ListActivity extends AppCompatActivity {
 
