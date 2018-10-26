@@ -99,6 +99,8 @@ public class ListActivity extends AppCompatActivity implements ViewInterface {
                 this.dateAndTime = itemView.findViewById(R.id.tv_date_and_time);
                 this.message = itemView.findViewById(R.id.tv_message);
                 this.container = itemView.findViewById(R.id.root_list_item);
+
+                this.container.setOnClickListener(this);
             }
 
             @Override
