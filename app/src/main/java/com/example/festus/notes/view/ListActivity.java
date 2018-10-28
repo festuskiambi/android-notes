@@ -2,8 +2,10 @@ package com.example.festus.notes.view;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,11 +57,26 @@ public class ListActivity extends AppCompatActivity implements ViewInterface {
 
     @Override
     public void setUpAdapterAndView(List<Note> listOfNotes) {
-     this.listOfNotes = listOfNotes;
+        this.listOfNotes = listOfNotes;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
-     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-     adapter= new CustomAdapter();
-     recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new CustomAdapter();
+        recyclerView.setAdapter(adapter);
+
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(
+                recyclerView.getContext(),
+                linearLayoutManager.getOrientation()
+        );
+
+        itemDecoration.setDrawable(
+                ContextCompat.getDrawable(
+                        ListActivity.this,
+                        R.drawable.white_divider
+                )
+        );
+
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
     private class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
@@ -67,7 +84,7 @@ public class ListActivity extends AppCompatActivity implements ViewInterface {
         @NonNull
         @Override
         public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v = layoutInflater.inflate(R.layout.item_note,parent,false);
+            View v = layoutInflater.inflate(R.layout.item_note, parent, false);
             return new CustomViewHolder(v);
         }
 
@@ -93,6 +110,7 @@ public class ListActivity extends AppCompatActivity implements ViewInterface {
             private TextView dateAndTime;
             private TextView message;
             private ViewGroup container;
+
             public CustomViewHolder(@NonNull View itemView) {
                 super(itemView);
                 this.coloredCircle = itemView.findViewById(R.id.imv_list_item_circle);
