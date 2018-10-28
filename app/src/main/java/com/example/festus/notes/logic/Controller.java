@@ -34,4 +34,10 @@ public class Controller {
                 testNote.getColorResource()
         );
     }
+
+    public void createNewNoteItem() {
+         Note newNote = dataSource.createNewNoteItem();
+
+         view.addNewNoteItemToView(newNote);
+    }
 }

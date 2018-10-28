@@ -47,21 +47,25 @@ public class FakeDataSource implements DataSourceInterface {
     public List<Note> getListOfNotes() {
 
         ArrayList<Note> listOfNotes = new ArrayList<>();
-        random = new Random();
 
         for (int i = 0; i < 12; i++) {
-            int randOne = random.nextInt(4);
-            int randTwo = random.nextInt(4);
-            int randThree = random.nextInt(4);
-
-            Note note = new Note(
-                    datesAndTimes[randOne],
-                    messages[randTwo],
-                    colours[randThree]
-            );
-
-            listOfNotes.add(note);
+            listOfNotes.add(createNewNoteItem());
         }
         return listOfNotes;
+    }
+
+    @Override
+    public Note createNewNoteItem() {
+        random = new Random();
+        int randOne = random.nextInt(4);
+        int randTwo = random.nextInt(4);
+        int randThree = random.nextInt(4);
+
+        Note note = new Note(
+                datesAndTimes[randOne],
+                messages[randTwo],
+                colours[randThree]
+        );
+        return note;
     }
 }

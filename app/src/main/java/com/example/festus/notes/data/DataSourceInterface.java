@@ -7,4 +7,6 @@ import java.util.List;
  */
 public interface DataSourceInterface {
     List<Note> getListOfNotes();
+
+    Note createNewNoteItem();
 }

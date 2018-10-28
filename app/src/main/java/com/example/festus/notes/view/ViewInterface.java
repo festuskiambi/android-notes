@@ -13,4 +13,5 @@ public interface ViewInterface {
 
     void setUpAdapterAndView(List<Note> listOfNotes);
 
+    void addNewNoteItemToView(Note note);
 }

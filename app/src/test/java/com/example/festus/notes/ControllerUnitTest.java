@@ -73,4 +73,13 @@ public class ControllerUnitTest {
                 testNote.getColorResource()
         );
     }
+
+    @Test
+    public void onCreateNewItemClicked(){
+        Mockito.when(dataSource.createNewNoteItem())
+                .thenReturn(testNote);
+
+        controller.createNewNoteItem();
+        Mockito.verify(view).addNewNoteItemToView(testNote);
+    }
 }
