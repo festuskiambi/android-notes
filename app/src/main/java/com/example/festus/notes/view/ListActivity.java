@@ -95,6 +95,22 @@ public class ListActivity extends AppCompatActivity implements ViewInterface, Vi
     }
 
     @Override
+    public void deleteNoteItemAtPosition(int position) {
+        listOfNotes.remove(position);
+        adapter.notifyItemRemoved(position);
+    }
+
+    @Override
+    public void showUndoSnackBar() {
+
+    }
+
+    @Override
+    public void insertNoteItem(int position, Note testNote) {
+
+    }
+
+    @Override
     public void onClick(View v) {
         int viewId = v.getId();
 

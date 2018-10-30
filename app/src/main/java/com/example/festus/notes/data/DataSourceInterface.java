@@ -9,4 +9,8 @@ public interface DataSourceInterface {
     List<Note> getListOfNotes();
 
     Note createNewNoteItem();
+
+    void deleteNoteItem(Note testNote);
+
+    void insertNote(Note testNote);
 }

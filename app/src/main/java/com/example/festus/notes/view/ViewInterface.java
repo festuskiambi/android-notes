@@ -14,4 +14,10 @@ public interface ViewInterface {
     void setUpAdapterAndView(List<Note> listOfNotes);
 
     void addNewNoteItemToView(Note note);
+
+    void deleteNoteItemAtPosition(int position);
+
+    void showUndoSnackBar();
+
+    void insertNoteItem(int position, Note testNote);
 }

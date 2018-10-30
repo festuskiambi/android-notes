@@ -14,6 +14,9 @@ public class Controller {
     private ViewInterface view;
     private DataSourceInterface dataSource;
 
+    private Note temporaryNote;
+    private int temporaryPosition;
+
     public Controller(ViewInterface view, DataSourceInterface dataSource) {
         this.view = view;
         this.dataSource = dataSource;
@@ -36,8 +39,38 @@ public class Controller {
     }
 
     public void createNewNoteItem() {
-         Note newNote = dataSource.createNewNoteItem();
+        Note newNote = dataSource.createNewNoteItem();
 
-         view.addNewNoteItemToView(newNote);
+        view.addNewNoteItemToView(newNote);
+    }
+
+    public void onNoteItemSwiped(int position, Note note) {
+        dataSource.deleteNoteItem(note);
+        view.deleteNoteItemAtPosition(position);
+
+        temporaryNote = note;
+        temporaryPosition = position;
+
+        view.showUndoSnackBar();
+
+    }
+
+    public void onUnDoConfirmed() {
+         if(temporaryNote !=null){
+             dataSource.insertNote(temporaryNote);
+             view.insertNoteItem(temporaryPosition,temporaryNote);
+
+             temporaryNote = null;
+             temporaryPosition = 0;
+         }
+         else {
+
+         }
+    }
+
+    public void onSnackBarTimeOut() {
+
+        temporaryPosition = 0;
+        temporaryNote = null;
     }
 }

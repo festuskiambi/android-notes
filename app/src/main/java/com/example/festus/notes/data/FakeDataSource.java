@@ -67,4 +67,14 @@ public class FakeDataSource implements DataSourceInterface {
         );
         return note;
     }
+
+    @Override
+    public void deleteNoteItem(Note note) {
+        getListOfNotes().remove(note);
+    }
+
+    @Override
+    public void insertNote(Note Note) {
+
+    }
 }

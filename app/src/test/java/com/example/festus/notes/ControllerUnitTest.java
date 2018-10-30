@@ -15,8 +15,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -40,7 +38,7 @@ public class ControllerUnitTest {
                     "and opinions of experts in your field",
             R.color.BLUE
     );
-
+    public static final int position = 3;
     @Before
     public void setUpTest() {
         MockitoAnnotations.initMocks(this);
@@ -83,5 +81,33 @@ public class ControllerUnitTest {
         Mockito.verify(view).addNewNoteItemToView(testNote);
     }
 
+   @Test
+    public void onNoteItemSwiped(){
+        controller.onNoteItemSwiped(position,testNote);
 
+        Mockito.verify(dataSource).deleteNoteItem(testNote);
+        Mockito.verify(view).deleteNoteItemAtPosition(position);
+        Mockito.verify(view).showUndoSnackBar();
+   }
+
+   @Test
+    public void onDeleteOperation(){
+//    Mockito.when(dataSource.createNewNoteItem())
+//            .thenReturn(testNote);
+
+    controller.onNoteItemSwiped(position,testNote);
+    controller.onUnDoConfirmed();
+
+    Mockito.verify(dataSource).insertNote(testNote);
+    Mockito.verify(view).insertNoteItem(position,testNote);
+   }
+
+   @Test
+    public void onSnackBarTimedOut(){
+
+        controller.onNoteItemSwiped(position,testNote);
+
+        controller.onSnackBarTimeOut();
+
+   }
 }
