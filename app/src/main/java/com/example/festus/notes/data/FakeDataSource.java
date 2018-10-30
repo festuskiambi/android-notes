@@ -32,15 +32,15 @@ public class FakeDataSource implements DataSourceInterface {
                     "learn/teach different from each other. Find an explanation that speaks to you."
     };
 
-    private final int[] colours = {
-            R.color.BLUE,
-            R.color.RED,
-            R.color.GREEN,
-            R.color.YELLOW
-
+    private final int[] drawables = {
+            R.drawable.blue_drawable,
+            R.drawable.red_drawable,
+            R.drawable.green_drawable,
+            R.drawable.yellow_drawable
     };
 
     public FakeDataSource() {
+        random = new Random();
     }
 
     @Override
@@ -56,7 +56,6 @@ public class FakeDataSource implements DataSourceInterface {
 
     @Override
     public Note createNewNoteItem() {
-        random = new Random();
         int randOne = random.nextInt(4);
         int randTwo = random.nextInt(4);
         int randThree = random.nextInt(4);
@@ -64,7 +63,7 @@ public class FakeDataSource implements DataSourceInterface {
         Note note = new Note(
                 datesAndTimes[randOne],
                 messages[randTwo],
-                colours[randThree]
+                drawables[randThree]
         );
         return note;
     }

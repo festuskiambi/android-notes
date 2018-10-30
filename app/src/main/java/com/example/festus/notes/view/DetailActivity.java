@@ -12,7 +12,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private static final String EXTRA_DATE_AND_TIME = "EXTRA_DATE_AND_TIME";
     private static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-    private static final String EXTRA_COLOR = "EXTRA_COLOR";
+    private static final String EXTRA_DRAWBALE = "EXTRA_DRAWABLE";
 
     private TextView dateAndTime;
     private TextView message;
@@ -26,15 +26,15 @@ public class DetailActivity extends AppCompatActivity {
         Intent i = getIntent();
         String dateAndTimeExtra = i.getStringExtra(EXTRA_DATE_AND_TIME);
         String messageExtra = i.getStringExtra(EXTRA_MESSAGE);
-        int drawableResourceExtra = i.getIntExtra(EXTRA_COLOR, 0);
+        int drawableResourceExtra = i.getIntExtra(EXTRA_DRAWBALE, 0);
 
-        dateAndTime =  findViewById(R.id.tv_date_and_time_header);
+        dateAndTime =  findViewById(R.id.lbl_date_and_time_header);
         dateAndTime.setText(dateAndTimeExtra);
 
-        message = findViewById(R.id.tv_message_body);
+        message = findViewById(R.id.lbl_message_body);
         message.setText(messageExtra);
 
-        coloredBackground = findViewById(R.id.cont_background_color);
+        coloredBackground = findViewById(R.id.imv_colored_background);
         coloredBackground.setBackgroundResource(
                 drawableResourceExtra
         );

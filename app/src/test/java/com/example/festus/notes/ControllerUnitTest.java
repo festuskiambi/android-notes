@@ -82,4 +82,6 @@ public class ControllerUnitTest {
         controller.createNewNoteItem();
         Mockito.verify(view).addNewNoteItemToView(testNote);
     }
+
+
 }

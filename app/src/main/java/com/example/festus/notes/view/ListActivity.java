@@ -26,7 +26,7 @@ public class ListActivity extends AppCompatActivity implements ViewInterface, Vi
 
     private static final String EXTRA_DATE_AND_TIME = "EXTRA_DATE_AND_TIME";
     private static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-    private static final String EXTRA_COLOR = "EXTRA_COLOR";
+    private static final String EXTRA_DRAWBALE = "EXTRA_DRAWABLE";
 
     private List<Note> listOfNotes;
 
@@ -54,7 +54,7 @@ public class ListActivity extends AppCompatActivity implements ViewInterface, Vi
         Intent i = new Intent(this, DetailActivity.class);
         i.putExtra(EXTRA_DATE_AND_TIME, dateAndTime);
         i.putExtra(EXTRA_MESSAGE, message);
-        i.putExtra(EXTRA_COLOR, colorResource);
+        i.putExtra(EXTRA_DRAWBALE, colorResource);
 
         startActivity(i);
     }
@@ -81,6 +81,8 @@ public class ListActivity extends AppCompatActivity implements ViewInterface, Vi
         );
 
         recyclerView.addItemDecoration(itemDecoration);
+
+
     }
 
     @Override
