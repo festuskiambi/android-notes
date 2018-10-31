@@ -1,5 +1,7 @@
 package com.example.festus.notes.logic;
 
+import android.view.View;
+
 import com.example.festus.notes.data.DataSourceInterface;
 import com.example.festus.notes.data.Note;
 import com.example.festus.notes.view.ViewInterface;
@@ -29,12 +31,13 @@ public class Controller {
         view.setUpAdapterAndView(dataSource.getListOfNotes());
     }
 
-    public void onNoteItemClicked(Note testNote) {
+    public void onNoteItemClicked(Note selectedNote, View viewRoot) {
 
         view.startDetailActivity(
-                testNote.getDateAndTime(),
-                testNote.getMessage(),
-                testNote.getColorResource()
+                selectedNote.getDateAndTime(),
+                selectedNote.getMessage(),
+                selectedNote.getColorResource(),
+                viewRoot
         );
     }
 

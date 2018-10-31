@@ -1,5 +1,7 @@
 package com.example.festus.notes.view;
 
+import android.view.View;
+
 import com.example.festus.notes.data.Note;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  */
 public interface ViewInterface {
 
-    void startDetailActivity(String dateAndTime, String message, int colorResource);
+    void startDetailActivity(String dateAndTime, String message, int colorResource, View viewRoot);
 
     void setUpAdapterAndView(List<Note> listOfNotes);
 

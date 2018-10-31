@@ -1,6 +1,8 @@
 package com.example.festus.notes.view;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +13,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Fade;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,13 +59,31 @@ public class ListActivity extends AppCompatActivity implements ViewInterface, Vi
     }
 
     @Override
-    public void startDetailActivity(String dateAndTime, String message, int colorResource) {
+    public void startDetailActivity(String dateAndTime, String message, int colorResource, View viewRoot) {
         Intent i = new Intent(this, DetailActivity.class);
         i.putExtra(EXTRA_DATE_AND_TIME, dateAndTime);
         i.putExtra(EXTRA_MESSAGE, message);
         i.putExtra(EXTRA_DRAWBALE, colorResource);
 
-        startActivity(i);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getWindow().setEnterTransition(new Fade(Fade.IN));
+            getWindow().setEnterTransition(new Fade(Fade.OUT));
+
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(this,
+                            new Pair<View, String>(viewRoot.findViewById(R.id.imv_list_item_circle),
+                                    getString(R.string.transition_drawable)),
+                            new Pair<View, String>(viewRoot.findViewById(R.id.tv_message),
+                                    getString(R.string.transition_message)),
+                            new Pair<View, String>(viewRoot.findViewById(R.id.tv_date_and_time),
+                                    getString(R.string.transition_time_and_date)));
+
+            startActivity(i, options.toBundle());
+
+        }else {
+
+            startActivity(i);
+        }
     }
 
     @Override
@@ -195,7 +217,7 @@ public class ListActivity extends AppCompatActivity implements ViewInterface, Vi
                         this.getAdapterPosition()
                 );
 
-                controller.onNoteItemClicked(note);
+                controller.onNoteItemClicked(note,v);
             }
         }
     }
