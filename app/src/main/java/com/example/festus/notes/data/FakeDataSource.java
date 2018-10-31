@@ -70,7 +70,6 @@ public class FakeDataSource implements DataSourceInterface {
 
     @Override
     public void deleteNoteItem(Note note) {
-        getListOfNotes().remove(note);
     }
 
     @Override

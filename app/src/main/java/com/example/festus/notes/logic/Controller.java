@@ -69,7 +69,6 @@ public class Controller {
     }
 
     public void onSnackBarTimeOut() {
-
         temporaryPosition = 0;
         temporaryNote = null;
     }
