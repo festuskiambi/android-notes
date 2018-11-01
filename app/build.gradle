@@ -40,8 +40,7 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$rootProject.lifecycleVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.lifecycleVersion"
 
+    implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.github.JakeWharton:ViewPagerIndicator:$rootProject.viewPagerIndicatorVersion"
-
-
 }
