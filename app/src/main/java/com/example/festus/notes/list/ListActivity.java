@@ -22,7 +22,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.festus.notes.R;
-import com.example.festus.notes.data.FakeDataSource;
 import com.example.festus.notes.data.Note;
 import com.example.festus.notes.detail.DetailActivity;
 import com.example.festus.notes.logic.Controller;

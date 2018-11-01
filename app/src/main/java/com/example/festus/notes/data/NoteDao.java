@@ -21,7 +21,7 @@ public interface NoteDao {
     LiveData<Note> getNoteById(String itemId);
     
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long  insertNote();
+    Long  insertNote(Note note);
     
     @Delete
     void deleteNote(Note note);
