@@ -1,6 +1,6 @@
 package com.example.festus.notes;
 
-import com.example.festus.notes.data.DataSourceInterface;
+import com.example.festus.notes.data.NoteDao;
 import com.example.festus.notes.data.Note;
 import com.example.festus.notes.logic.Controller;
 import com.example.festus.notes.view.ViewInterface;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class ControllerUnitTest {
 
     @Mock
-    DataSourceInterface dataSource;
+    NoteDao dataSource;
 
     @Mock
     ViewInterface view;
@@ -66,7 +66,7 @@ public class ControllerUnitTest {
         controller.onNoteItemClicked(testNote);
 
         Mockito.verify(view).startDetailActivity(
-                testNote.getDateAndTime(),
+                testNote.getItemId(),
                 testNote.getMessage(),
                 testNote.getColorResource()
         );

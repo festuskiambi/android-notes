@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * Created by Festus Kiambi on 10/25/18.
  */
-public class FakeDataSource implements DataSourceInterface {
+public class FakeDataSource implements NoteDao {
 
     private static final int sizeOfCollection = 12;
     private Random random;

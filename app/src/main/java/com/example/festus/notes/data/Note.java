@@ -1,25 +1,30 @@
 package com.example.festus.notes.data;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 /**
  * Created by Festus Kiambi on 10/25/18.
  */
+@Entity
 public class Note {
-    private String dateAndTime;
+    @PrimaryKey
+    private String itemId;
     private String message;
     private int colorResource;
 
-    public Note(String dateAndTime, String message, int colorResource) {
-        this.dateAndTime = dateAndTime;
+    public Note(String itemId, String message, int colorResource) {
+        this.itemId = itemId;
         this.message = message;
         this.colorResource = colorResource;
     }
 
-    public String getDateAndTime() {
-        return dateAndTime;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setDateAndTime(String dateAndTime) {
-        this.dateAndTime = dateAndTime;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
     public String getMessage() {

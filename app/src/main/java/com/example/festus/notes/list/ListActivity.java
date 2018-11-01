@@ -184,7 +184,7 @@ public class ListActivity extends AppCompatActivity implements ViewInterface, Vi
 
             holder.coloredCircle.setImageResource(currentNote.getColorResource());
             holder.message.setText(currentNote.getMessage());
-            holder.dateAndTime.setText(currentNote.getDateAndTime());
+            holder.dateAndTime.setText(currentNote.getItemId());
             holder.loading.setVisibility(View.INVISIBLE);
         }
 
