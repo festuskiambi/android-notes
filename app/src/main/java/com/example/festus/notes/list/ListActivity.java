@@ -1,4 +1,4 @@
-package com.example.festus.notes.view;
+package com.example.festus.notes.list;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -18,14 +18,15 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.festus.notes.R;
 import com.example.festus.notes.data.FakeDataSource;
 import com.example.festus.notes.data.Note;
+import com.example.festus.notes.detail.DetailActivity;
 import com.example.festus.notes.logic.Controller;
+import com.example.festus.notes.view.ViewInterface;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.festus.notes.view;
+package com.example.festus.notes.detail;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
