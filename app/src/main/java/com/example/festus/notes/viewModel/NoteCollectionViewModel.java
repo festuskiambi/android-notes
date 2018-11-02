@@ -23,7 +23,7 @@ public class NoteCollectionViewModel extends ViewModel {
         return repository.getListOfNotes();
     }
 
-    private void deleteNote(Note note){
+    public void deleteNote(Note note){
         DeleteNoteTask task = new DeleteNoteTask();
         task.execute(note);
     }

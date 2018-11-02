@@ -1,6 +1,8 @@
 package com.example.festus.notes.create;
 
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,15 +16,20 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.festus.notes.NoteApplication;
 import com.example.festus.notes.R;
 import com.example.festus.notes.data.Note;
 import com.example.festus.notes.list.ListActivity;
+import com.example.festus.notes.viewModel.NewNoteViewModel;
+import com.example.festus.notes.viewModel.NoteViewModel;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,20 +43,17 @@ public class CreateFragment extends Fragment {
     private ImageButton back;
     private ImageButton done;
     private EditText messageInput;
-
     private PagerAdapter pagerAdapter;
 
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
-
-
+    private NewNoteViewModel newNoteViewModel;
 
     public CreateFragment() {
     }
 
-
-
-    // TODO: Rename and change types and number of parameters
     public static CreateFragment newInstance() {
         return new CreateFragment();
     }
@@ -58,6 +62,20 @@ public class CreateFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        ((NoteApplication) getActivity().getApplication())
+                .getApplicationComponent()
+                .inject(this);
+
+    }
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        //Set up and subscribe (observe) to the ViewModel
+      newNoteViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(NewNoteViewModel.class);
+
     }
 
     @Override
@@ -65,7 +83,7 @@ public class CreateFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_create, container, false);
 
-        back = (ImageButton) v.findViewById(R.id.imb_create_back);
+        back = v.findViewById(R.id.imb_create_back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,22 +92,22 @@ public class CreateFragment extends Fragment {
             }
         });
 
-        done = (ImageButton) v.findViewById(R.id.imb_create_done);
-//        done.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Note note = new Note(
-//                        getDate(),
-//                        messageInput.getText().toString(),
-//                        getDrawableResource(drawablePager.getCurrentItem())
-//                );
-//                newListItemViewModel.addNewItemToDatabase(listItem);
-//
-//                startListActivity();
-//            }
-//        });
+        done = v.findViewById(R.id.imb_create_done);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Note note = new Note(
+                        getDate(),
+                        messageInput.getText().toString(),
+                        getDrawableResource(drawablePager.getCurrentItem())
+                );
+                newNoteViewModel.addnewNoteToDatabase(note);
 
-        messageInput =  v.findViewById(R.id.edt_create_message);
+                startListActivity();
+            }
+        });
+
+        messageInput = v.findViewById(R.id.edt_create_message);
 
         drawablePager = (v.findViewById(R.id.vp_create_drawable));
 
@@ -103,8 +121,8 @@ public class CreateFragment extends Fragment {
     }
 
 
-    public int getDrawableResource (int pagerItemPosition){
-        switch (pagerItemPosition){
+    public int getDrawableResource(int pagerItemPosition) {
+        switch (pagerItemPosition) {
             case 0:
                 return R.drawable.red_drawable;
             case 1:

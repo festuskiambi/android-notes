@@ -22,14 +22,16 @@ import android.app.Application;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
 
+import com.example.festus.notes.data.NoteDao;
+import com.example.festus.notes.data.NoteDatabase;
+import com.example.festus.notes.data.NoteRepository;
+import com.example.festus.notes.viewModel.CustomViewModelFactory;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import roomdemo.wiseass.com.roomdemo.data.ListItemDao;
-import roomdemo.wiseass.com.roomdemo.data.ListItemDatabase;
-import roomdemo.wiseass.com.roomdemo.data.ListItemRepository;
-import roomdemo.wiseass.com.roomdemo.viewmodel.CustomViewModelFactory;
+
 
 /**
  * Created by R_KAY on 8/18/2017.
@@ -37,37 +39,38 @@ import roomdemo.wiseass.com.roomdemo.viewmodel.CustomViewModelFactory;
 @Module
 public class RoomModule {
 
-    private final ListItemDatabase database;
+
+    private final NoteDatabase database;
 
     public RoomModule(Application application) {
         this.database = Room.databaseBuilder(
                 application,
-                ListItemDatabase.class,
-                "ListItem.db"
+                NoteDatabase.class,
+                "Note.db"
         ).build();
     }
 
     @Provides
     @Singleton
-    ListItemRepository provideListItemRepository(ListItemDao listItemDao){
-        return new ListItemRepository(listItemDao);
+    NoteRepository provideNoteRepository(NoteDao noteDao){
+        return new NoteRepository(noteDao);
     }
 
     @Provides
     @Singleton
-    ListItemDao provideListItemDao(ListItemDatabase database){
-        return database.listItemDao();
+    NoteDao provideNoteDao(NoteDatabase database){
+        return database.noteDao();
     }
 
     @Provides
     @Singleton
-    ListItemDatabase provideListItemDatabase(Application application){
+    NoteDatabase provideNoteDatabase(Application application){
         return database;
     }
 
     @Provides
     @Singleton
-    ViewModelProvider.Factory provideViewModelFactory(ListItemRepository repository){
+    ViewModelProvider.Factory provideViewModelFactory(NoteRepository repository){
         return new CustomViewModelFactory(repository);
     }
 }

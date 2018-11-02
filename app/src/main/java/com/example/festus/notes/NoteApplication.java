@@ -3,6 +3,9 @@ package com.example.festus.notes;
 import android.app.Application;
 
 import com.example.festus.notes.dependancyinjection.ApplicationComponent;
+import com.example.festus.notes.dependancyinjection.ApplicationModule;
+import com.example.festus.notes.dependancyinjection.DaggerApplicationComponent;
+import com.example.festus.notes.dependancyinjection.RoomModule;
 
 
 import dagger.android.DaggerApplication;
@@ -17,7 +20,6 @@ public class NoteApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-
         applicationComponent = DaggerApplicationComponent
                 .builder()
                 .applicationModule(new ApplicationModule(this))
@@ -25,7 +27,6 @@ public class NoteApplication extends Application {
                 .build();
 
     }
-
     public ApplicationComponent getApplicationComponent() {
         return applicationComponent;
     }

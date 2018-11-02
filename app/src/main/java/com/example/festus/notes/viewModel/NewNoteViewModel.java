@@ -17,9 +17,8 @@ public class NewNoteViewModel extends ViewModel {
         this.repository = repository;
     }
 
-    public void addnewNoteToDatabase(Note note){
-        AddNoteTask task = new AddNoteTask();
-        task.execute(note);
+    public void addnewNoteToDatabase(Note note) {
+        new AddNoteTask().execute(note);
     }
 
 

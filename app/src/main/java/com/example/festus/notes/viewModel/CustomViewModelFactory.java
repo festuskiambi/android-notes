@@ -17,9 +17,8 @@ public class CustomViewModelFactory implements ViewModelProvider.Factory {
         this.repository = repository;
     }
 
-    @NonNull
     @Override
-    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+    public <T extends ViewModel> T create( Class<T> modelClass) {
         if (modelClass.isAssignableFrom(NoteCollectionViewModel.class))
             return (T) new NoteCollectionViewModel(repository);
         else if (modelClass.isAssignableFrom(NoteViewModel.class))

@@ -2,6 +2,7 @@ package com.example.festus.notes.data;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Festus Kiambi on 10/25/18.
@@ -9,6 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Note {
     @PrimaryKey
+    @NonNull
     private String itemId;
     private String message;
     private int colorResource;
