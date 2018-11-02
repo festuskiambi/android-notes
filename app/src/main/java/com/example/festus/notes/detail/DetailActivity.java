@@ -1,43 +1,47 @@
 package com.example.festus.notes.detail;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.festus.notes.R;
+import com.example.festus.notes.util.BaseActivity;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends BaseActivity {
 
-    private static final String EXTRA_DATE_AND_TIME = "EXTRA_DATE_AND_TIME";
-    private static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-    private static final String EXTRA_DRAWBALE = "EXTRA_DRAWABLE";
-
-    private TextView dateAndTime;
-    private TextView message;
-    private View coloredBackground;
+    private static final String DETAIL_FRAG = "DETAIL_FRAG";
+    private static final String EXTRA_ITEM_ID = "EXTRA_ITEM_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+
         Intent i = getIntent();
-        String dateAndTimeExtra = i.getStringExtra(EXTRA_DATE_AND_TIME);
-        String messageExtra = i.getStringExtra(EXTRA_MESSAGE);
-        int drawableResourceExtra = i.getIntExtra(EXTRA_DRAWBALE, 0);
 
-        dateAndTime =  findViewById(R.id.lbl_date_and_time_header);
-        dateAndTime.setText(dateAndTimeExtra);
+        //if extra is null, not worth even bothering to set up the MVVM stuff; Kill it with fire.
+        if (i.hasExtra(EXTRA_ITEM_ID)) {
+            String itemId = i.getStringExtra(EXTRA_ITEM_ID);
 
-        message = findViewById(R.id.lbl_message_body);
-        message.setText(messageExtra);
+            FragmentManager manager = getSupportFragmentManager();
 
-        coloredBackground = findViewById(R.id.imv_colored_background);
-        coloredBackground.setBackgroundResource(
-                drawableResourceExtra
-        );
+            DetailFragment fragment = (DetailFragment) manager.findFragmentByTag(DETAIL_FRAG);
+
+            if (fragment == null) {
+                fragment = DetailFragment.newInstance(itemId);
+            }
+
+            addFragmentToActivity(manager,
+                    fragment,
+                    R.id.root_activity_detail,
+                    DETAIL_FRAG
+            );
+
+        } else {
+            Toast.makeText(this, R.string.error_no_extra_found, Toast.LENGTH_LONG).show();
+        }
 
     }
 }
