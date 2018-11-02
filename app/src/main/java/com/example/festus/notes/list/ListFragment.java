@@ -3,6 +3,7 @@ package com.example.festus.notes.list;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.arch.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,12 +24,16 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.festus.notes.NoteApplication;
 import com.example.festus.notes.R;
 import com.example.festus.notes.create.CreateActivity;
 import com.example.festus.notes.data.Note;
 import com.example.festus.notes.detail.DetailActivity;
+import com.example.festus.notes.viewModel.NoteCollectionViewModel;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,6 +51,11 @@ public class ListFragment extends Fragment {
     private CustomAdapter adapter;
     private Toolbar toolbar;
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
+    NoteCollectionViewModel noteCollectionViewModel;
+
 
     public ListFragment() {
         // Required empty public constructor
@@ -60,6 +70,15 @@ public class ListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        ((NoteApplication) getActivity().getApplication())
+                .getApplicationComponent()
+                .inject(this);
+
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
 
