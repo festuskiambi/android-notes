@@ -16,7 +16,7 @@
  *
  */
 
-package roomdemo.wiseass.com.roomdemo.util;
+package com.example.festus.notes.util;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
