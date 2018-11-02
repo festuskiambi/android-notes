@@ -1,8 +1,8 @@
 package com.example.festus.notes.detail;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 import com.example.festus.notes.R;

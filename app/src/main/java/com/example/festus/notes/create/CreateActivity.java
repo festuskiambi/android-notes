@@ -1,8 +1,7 @@
 package com.example.festus.notes.create;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 
 import com.example.festus.notes.R;
 import com.example.festus.notes.util.BaseActivity;
